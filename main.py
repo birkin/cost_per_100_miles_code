@@ -28,8 +28,7 @@ def main() -> None:
         logging.debug('%s miles/gallon', miles_per_gallon)
 
         for price_per_gallon, cost_per_100_miles in price_cost_values:
-            dollars_per_100_miles = cost_per_100_miles / Decimal('100')
-            logging.debug('  $%.2f per gallon: $%.2f per 100 miles', price_per_gallon, dollars_per_100_miles)
+            logging.debug('  $%.2f per gallon: $%.2f per 100 miles', price_per_gallon, cost_per_100_miles)
 
 
 if __name__ == '__main__':

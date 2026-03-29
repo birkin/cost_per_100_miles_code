@@ -207,6 +207,16 @@ def calculate_gas_100_mile_cost_values(
     return grouped_cost_values
 
 
+def calculate_gallons_required(distance_miles: Decimal, miles_per_gallon: Decimal) -> Decimal:
+    """
+    Calculates the gallons required for a given distance and fuel efficiency.
+
+    Called by: calculate_gas_100_mile_cost_values()
+    """
+    gallons_required: Decimal = distance_miles / miles_per_gallon
+    return gallons_required
+
+
 def get_gas_100_mile_cost_values() -> list[tuple[Decimal, list[tuple[Decimal, Decimal]]]]:
     """
     Returns gas 100-mile cost values for the configured efficiencies and prices.
