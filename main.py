@@ -27,15 +27,15 @@ def main() -> None:
 
     output_markdown(ev_100_mile_cost_values, gas_100_mile_cost_values)
 
-    for efficiency_label, cost_per_100_miles in ev_100_mile_cost_values:
-        dollars_per_100_miles = cost_per_100_miles / Decimal('100')
-        logging.debug('%s: $%.2f per 100 miles', efficiency_label, dollars_per_100_miles)
+    # for efficiency_label, cost_per_100_miles in ev_100_mile_cost_values:
+    #     dollars_per_100_miles = cost_per_100_miles / Decimal('100')
+    #     logging.debug('%s: $%.2f per 100 miles', efficiency_label, dollars_per_100_miles)
 
-    for miles_per_gallon, price_cost_values in gas_100_mile_cost_values:
-        logging.debug('%s miles/gallon', miles_per_gallon)
+    # for miles_per_gallon, price_cost_values in gas_100_mile_cost_values:
+    #     logging.debug('%s miles/gallon', miles_per_gallon)
 
-        for price_per_gallon, cost_per_100_miles in price_cost_values:
-            logging.debug('  $%.2f per gallon: $%.2f per 100 miles', price_per_gallon, cost_per_100_miles)
+    #     for price_per_gallon, cost_per_100_miles in price_cost_values:
+    #         logging.debug('  $%.2f per gallon: $%.2f per 100 miles', price_per_gallon, cost_per_100_miles)
 
 
 if __name__ == '__main__':

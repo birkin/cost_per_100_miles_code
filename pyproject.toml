@@ -1,0 +1,12 @@
+[project]
+name = "cost-per-100-miles-code"
+version = "0.0.0"
+description = "Calculates cost per 100 miles for EV and gas vehicles."
+readme = "https://github.com/birkin/cost_per_100_miles_code/blob/main/README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[dependency-groups]
+local = []
+staging = []
+prod = []
