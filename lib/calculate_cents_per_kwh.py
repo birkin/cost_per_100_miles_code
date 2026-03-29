@@ -187,24 +187,27 @@ def load_gas_prices(filepath: pathlib.Path) -> list[Decimal]:
 def calculate_gas_100_mile_cost_values(
     efficiencies: list[Decimal],
     prices: list[Decimal],
-) -> list[tuple[str, Decimal]]:
+) -> list[tuple[Decimal, list[tuple[Decimal, Decimal]]]]:
     """
     Calculates gas cost values for driving 100 miles at each efficiency and price.
 
     Called by: get_gas_100_mile_cost_values()
     """
-    cost_values: list[tuple[str, Decimal]] = []
+    grouped_cost_values: list[tuple[Decimal, list[tuple[Decimal, Decimal]]]] = []
 
-    for price in prices:
-        for efficiency in efficiencies:
+    for efficiency in efficiencies:
+        efficiency_values: list[tuple[Decimal, Decimal]] = []
+
+        for price in prices:
             cost_per_100_miles = (Decimal('100') / efficiency) * price
-            label = f'{efficiency} miles/gallon at ${price} per gallon'
-            cost_values.append((label, cost_per_100_miles))
+            efficiency_values.append((price, cost_per_100_miles))
 
-    return cost_values
+        grouped_cost_values.append((efficiency, efficiency_values))
+
+    return grouped_cost_values
 
 
-def get_gas_100_mile_cost_values() -> list[tuple[str, Decimal]]:
+def get_gas_100_mile_cost_values() -> list[tuple[Decimal, list[tuple[Decimal, Decimal]]]]:
     """
     Returns gas 100-mile cost values for the configured efficiencies and prices.
 
