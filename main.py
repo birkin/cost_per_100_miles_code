@@ -20,7 +20,8 @@ def main() -> None:
     ev_100_mile_cost_values: list[tuple[str, Decimal]] = get_ev_100_mile_cost_values(rhode_island_cents_per_kwh)
 
     for efficiency_label, cost_per_100_miles in ev_100_mile_cost_values:
-        logging.debug('%s: %s cents per 100 miles', efficiency_label, cost_per_100_miles)
+        dollars_per_100_miles = cost_per_100_miles / Decimal('100')
+        logging.debug('%s: $%.2f per 100 miles', efficiency_label, dollars_per_100_miles)
 
 
 if __name__ == '__main__':
