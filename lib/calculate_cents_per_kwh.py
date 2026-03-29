@@ -66,13 +66,14 @@ def calculate_aggregate_values(
     return result
 
 
-def main() -> None:
+def print_cents_per_kwh_values() -> None:
     """
-    Prints per-entry and overall cents-per-kilowatt-hour values.
+    Loads the electricity-cost JSON, calculates cents-per-kilowatt-hour values, and prints them.
 
-    Called by: __main__
+    Called by: main()
     """
-    filepath = pathlib.Path('/mnt/data/electricity_cost.json')
+    module_directory = pathlib.Path(__file__).resolve().parent
+    filepath = module_directory / 'electricity_cost.json'
     entries = load_entries(filepath)
     per_entry_values, overall_cents_per_kwh, rounded_overall_cents_per_kwh = calculate_aggregate_values(entries)
 
@@ -81,6 +82,28 @@ def main() -> None:
 
     print(f'overall detailed: {overall_cents_per_kwh} cents/kWh')
     print(f'overall rounded: {rounded_overall_cents_per_kwh} cents/kWh')
+
+
+def get_rounded_cents_per_kwh() -> Decimal:
+    """
+    Returns the rounded overall cents-per-kilowatt-hour value.
+
+    Called by: main()
+    """
+    module_directory = pathlib.Path(__file__).resolve().parent
+    filepath = module_directory / 'electricity_cost.json'
+    entries = load_entries(filepath)
+    _, _, rounded_overall_cents_per_kwh = calculate_aggregate_values(entries)
+    return rounded_overall_cents_per_kwh
+
+
+def main() -> None:
+    """
+    Prints per-entry and overall cents-per-kilowatt-hour values.
+
+    Called by: __main__
+    """
+    print_cents_per_kwh_values()
 
 
 if __name__ == '__main__':
