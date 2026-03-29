@@ -17,6 +17,7 @@ def format_money(value: Decimal) -> str:
 
 
 def build_markdown(
+    rhode_island_cents_per_kwh: Decimal,
     ev_100_mile_cost_values: list[tuple[str, Decimal]],
     gas_100_mile_cost_values: list[tuple[Decimal, list[tuple[Decimal, Decimal]]]],
 ) -> str:
@@ -29,6 +30,14 @@ def build_markdown(
 
     lines.append('# EV vs Gas Vehicle Costs')
     lines.append('')
+    lines.append(f'Rhode Island cents per kWh: {rhode_island_cents_per_kwh}')
+    lines.append('')
+
+    lines.append('## Rhode Island Electricity Rates')
+    lines.append('')
+    lines.append('Average of July, August, and September 2025 residential bills.')
+    lines.append('')
+    lines.append('')
 
     lines.append('## EV Costs')
     lines.append('')
@@ -38,6 +47,8 @@ def build_markdown(
         lines.append(f'- {efficiency_label}: {format_money(dollars_per_100_miles)} per 100 miles')
 
     lines.append('')
+    lines.append('')
+
     lines.append('## Gas Costs')
     lines.append('')
 
@@ -47,8 +58,7 @@ def build_markdown(
 
         for price_per_gallon, cost_per_100_miles in price_cost_values:
             lines.append(
-                f'  - {format_money(price_per_gallon)} per gallon: '
-                f'{format_money(cost_per_100_miles)} per 100 miles'
+                f'  - {format_money(price_per_gallon)} per gallon: {format_money(cost_per_100_miles)} per 100 miles'
             )
 
         lines.append('')
@@ -58,6 +68,7 @@ def build_markdown(
 
 
 def output_markdown(
+    rhode_island_cents_per_kwh: Decimal,
     ev_100_mile_cost_values: list[tuple[str, Decimal]],
     gas_100_mile_cost_values: list[tuple[Decimal, list[tuple[Decimal, Decimal]]]],
     output_filepath: Path | None = None,
@@ -70,7 +81,7 @@ def output_markdown(
     module_directory = Path(__file__).resolve().parent
     project_directory = module_directory.parent
     target_filepath = output_filepath if output_filepath is not None else project_directory / 'ev_vs_gasv_costs.md'
-    markdown = build_markdown(ev_100_mile_cost_values, gas_100_mile_cost_values)
+    markdown = build_markdown(rhode_island_cents_per_kwh, ev_100_mile_cost_values, gas_100_mile_cost_values)
     target_filepath.parent.mkdir(parents=True, exist_ok=True)
     target_filepath.write_text(markdown, encoding='utf-8')
     return target_filepath

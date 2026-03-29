@@ -1,5 +1,12 @@
 # EV vs Gas Vehicle Costs
 
+Rhode Island cents per kWh: 26
+
+## Rhode Island Electricity Rates
+
+Average of July, August, and September 2025 residential bills.
+
+
 ## EV Costs
 
 - 1.5 miles/kWh: $17.33 per 100 miles
@@ -9,6 +16,7 @@
 - 3.5 miles/kWh: $7.43 per 100 miles
 - 4.0 miles/kWh: $6.50 per 100 miles
 - 4.5 miles/kWh: $5.78 per 100 miles
+
 
 ## Gas Costs
 

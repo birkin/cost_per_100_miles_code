@@ -25,7 +25,7 @@ def main() -> None:
     ev_100_mile_cost_values: list[tuple[str, Decimal]] = get_ev_100_mile_cost_values(rhode_island_cents_per_kwh)
     gas_100_mile_cost_values: list[tuple[Decimal, list[tuple[Decimal, Decimal]]]] = get_gas_100_mile_cost_values()
 
-    output_markdown(ev_100_mile_cost_values, gas_100_mile_cost_values)
+    output_markdown(rhode_island_cents_per_kwh, ev_100_mile_cost_values, gas_100_mile_cost_values)
 
     # for efficiency_label, cost_per_100_miles in ev_100_mile_cost_values:
     #     dollars_per_100_miles = cost_per_100_miles / Decimal('100')
