@@ -3,9 +3,9 @@
 # requires-python = ">=3.12"
 # ///
 
-from decimal import Decimal, ROUND_HALF_UP
 import json
 import pathlib
+from decimal import ROUND_HALF_UP, Decimal
 
 
 def load_entries(filepath: pathlib.Path) -> list[dict[str, dict[str, Decimal]]]:
