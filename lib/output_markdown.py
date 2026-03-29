@@ -48,6 +48,8 @@ def build_markdown(
         lines.append(f'- {efficiency_label}: {format_money(dollars_per_100_miles)} per 100 miles')
 
     lines.append('')
+    lines.append('(2024-Tesla-Model-Y, 3.8 miles/kWh; 2018-Chevy-Bolt, 4.0 miles/kWh)')
+    lines.append('')
     lines.append('')
 
     lines.append('## Gas Costs')
