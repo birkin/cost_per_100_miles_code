@@ -15,6 +15,7 @@ class TestOutputMarkdown(unittest.TestCase):
         """
         Checks markdown output with representative EV and gas values.
         """
+        rhode_island_cents_per_kwh = Decimal('26')
         ev_100_mile_cost_values: list[tuple[str, Decimal]] = [
             ('2.5 miles/kWh', Decimal('1040')),
         ]
@@ -30,6 +31,7 @@ class TestOutputMarkdown(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_directory:
             output_filepath = Path(temp_directory) / 'ev_vs_gasv_costs.md'
             written_filepath = output_markdown(
+                rhode_island_cents_per_kwh,
                 ev_100_mile_cost_values,
                 gas_100_mile_cost_values,
                 output_filepath,
@@ -39,6 +41,8 @@ class TestOutputMarkdown(unittest.TestCase):
             contents = output_filepath.read_text(encoding='utf-8')
 
         self.assertIn('# EV vs Gas Vehicle Costs', contents)
+        self.assertIn('## Rhode Island Electricity Rates', contents)
+        self.assertIn('Rhode Island cents per kWh: 26', contents)
         self.assertIn('## EV Costs', contents)
         self.assertIn('- 2.5 miles/kWh: $10.40 per 100 miles', contents)
         self.assertIn('## Gas Costs', contents)
@@ -51,10 +55,12 @@ class TestOutputMarkdown(unittest.TestCase):
         """
         with tempfile.TemporaryDirectory() as temp_directory:
             output_filepath = Path(temp_directory) / 'ev_vs_gasv_costs.md'
-            output_markdown([], [], output_filepath)
+            output_markdown(Decimal('26'), [], [], output_filepath)
             contents = output_filepath.read_text(encoding='utf-8')
 
         self.assertIn('# EV vs Gas Vehicle Costs', contents)
+        self.assertIn('## Rhode Island Electricity Rates', contents)
+        self.assertIn('Rhode Island cents per kWh: 26', contents)
         self.assertIn('## EV Costs', contents)
         self.assertIn('## Gas Costs', contents)
         self.assertNotIn('miles/kWh', contents)
