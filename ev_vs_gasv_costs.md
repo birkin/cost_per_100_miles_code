@@ -18,6 +18,8 @@ Average of July, August, and September 2025 residential bills.
 - 4.0 miles/kWh: $6.50 per 100 miles
 - 4.5 miles/kWh: $5.78 per 100 miles
 
+(2024-Tesla-Model-Y, 3.8 miles/kWh; 2018-Chevy-Bolt, 4.0 miles/kWh)
+
 
 ## Gas Costs
 
