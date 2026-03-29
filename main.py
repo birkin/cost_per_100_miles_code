@@ -6,8 +6,12 @@
 import logging
 from decimal import Decimal
 
-from lib.calculate_cents_per_kwh import get_ev_100_mile_cost_values, get_rounded_cents_per_kwh
+from lib.calculate_cents_per_kwh import (
+    get_ev_100_mile_cost_values,
+    get_rounded_cents_per_kwh,
+)
 from lib.gas_calculations import get_gas_100_mile_cost_values
+from lib.output_markdown import output_markdown
 
 
 def main() -> None:
@@ -20,6 +24,8 @@ def main() -> None:
     rhode_island_cents_per_kwh = get_rounded_cents_per_kwh()
     ev_100_mile_cost_values: list[tuple[str, Decimal]] = get_ev_100_mile_cost_values(rhode_island_cents_per_kwh)
     gas_100_mile_cost_values: list[tuple[Decimal, list[tuple[Decimal, Decimal]]]] = get_gas_100_mile_cost_values()
+
+    output_markdown(ev_100_mile_cost_values, gas_100_mile_cost_values)
 
     for efficiency_label, cost_per_100_miles in ev_100_mile_cost_values:
         dollars_per_100_miles = cost_per_100_miles / Decimal('100')
