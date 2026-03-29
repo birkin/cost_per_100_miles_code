@@ -3,7 +3,10 @@
 # requires-python = ">=3.12"
 # ///
 
-from lib.calculate_cents_per_kwh import get_rounded_cents_per_kwh, print_ev_100_mile_cost_values
+import logging
+from decimal import Decimal
+
+from lib.calculate_cents_per_kwh import get_ev_100_mile_cost_values, get_rounded_cents_per_kwh
 
 
 def main() -> None:
@@ -12,9 +15,12 @@ def main() -> None:
 
     Called by: __main__
     """
+    logging.basicConfig(level=logging.DEBUG, format='%(message)s')
     rhode_island_cents_per_kwh = get_rounded_cents_per_kwh()
-    print_ev_100_mile_cost_values(rhode_island_cents_per_kwh)
-    print(f'Rhode Island cents per kWh: {rhode_island_cents_per_kwh}')
+    ev_100_mile_cost_values: list[tuple[str, Decimal]] = get_ev_100_mile_cost_values(rhode_island_cents_per_kwh)
+
+    for efficiency_label, cost_per_100_miles in ev_100_mile_cost_values:
+        logging.debug('%s: %s cents per 100 miles', efficiency_label, cost_per_100_miles)
 
 
 if __name__ == '__main__':

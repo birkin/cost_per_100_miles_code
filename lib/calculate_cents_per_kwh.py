@@ -4,6 +4,7 @@
 # ///
 
 import json
+import logging
 import pathlib
 from decimal import ROUND_HALF_UP, Decimal
 
@@ -78,10 +79,10 @@ def print_cents_per_kwh_values() -> None:
     per_entry_values, overall_cents_per_kwh, rounded_overall_cents_per_kwh = calculate_aggregate_values(entries)
 
     for date_key, cents_per_kwh in per_entry_values:
-        print(f'{date_key}: {cents_per_kwh} cents/kWh')
+        logging.debug('%s: %s cents/kWh', date_key, cents_per_kwh)
 
-    print(f'overall detailed: {overall_cents_per_kwh} cents/kWh')
-    print(f'overall rounded: {rounded_overall_cents_per_kwh} cents/kWh')
+    logging.debug('overall detailed: %s cents/kWh', overall_cents_per_kwh)
+    logging.debug('overall rounded: %s cents/kWh', rounded_overall_cents_per_kwh)
 
 
 def get_rounded_cents_per_kwh() -> Decimal:
@@ -94,6 +95,7 @@ def get_rounded_cents_per_kwh() -> Decimal:
     filepath = module_directory / 'electricity_cost.json'
     entries = load_entries(filepath)
     _, _, rounded_overall_cents_per_kwh = calculate_aggregate_values(entries)
+    logging.debug('Rhode Island cents per kWh: %s', rounded_overall_cents_per_kwh)
     return rounded_overall_cents_per_kwh
 
 
@@ -126,6 +128,25 @@ def calculate_ev_100_mile_cost_values(
     return cost_values
 
 
+def get_ev_100_mile_cost_values(cents_per_kwh: Decimal) -> list[tuple[str, Decimal]]:
+    """
+    Returns EV 100-mile cost values for the configured efficiency levels.
+
+    Called by: main()
+    """
+    module_directory = pathlib.Path(__file__).resolve().parent
+    efficiencies_filepath = module_directory / 'ev_efficiency.json'
+    efficiencies = load_efficiencies(efficiencies_filepath)
+    cost_values = calculate_ev_100_mile_cost_values(efficiencies, cents_per_kwh)
+
+    formatted_cost_values: list[tuple[str, Decimal]] = []
+
+    for efficiency, cost_per_100_miles in cost_values:
+        formatted_cost_values.append((f'{efficiency} miles/kWh', cost_per_100_miles))
+
+    return formatted_cost_values
+
+
 def print_ev_100_mile_cost_values(cents_per_kwh: Decimal) -> None:
     """
     Loads EV efficiencies and prints the cost to drive 100 miles for each value.
@@ -138,7 +159,7 @@ def print_ev_100_mile_cost_values(cents_per_kwh: Decimal) -> None:
     cost_values = calculate_ev_100_mile_cost_values(efficiencies, cents_per_kwh)
 
     for efficiency, cost_per_100_miles in cost_values:
-        print(f'{efficiency} miles/kWh: {cost_per_100_miles} cents per 100 miles')
+        logging.debug('%s miles/kWh: %s cents per 100 miles', efficiency, cost_per_100_miles)
 
 
 def main() -> None:
