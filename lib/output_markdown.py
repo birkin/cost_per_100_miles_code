@@ -30,10 +30,11 @@ def build_markdown(
 
     lines.append('# EV vs Gas Vehicle Costs')
     lines.append('')
-    lines.append(f'Rhode Island cents per kWh: {rhode_island_cents_per_kwh}')
     lines.append('')
 
     lines.append('## Rhode Island Electricity Rates')
+    lines.append('')
+    lines.append(f'Rhode Island cents per kWh: {rhode_island_cents_per_kwh}')
     lines.append('')
     lines.append('Average of July, August, and September 2025 residential bills.')
     lines.append('')
@@ -55,13 +56,14 @@ def build_markdown(
     for miles_per_gallon, price_cost_values in gas_100_mile_cost_values:
         lines.append(f'### {miles_per_gallon} miles/gallon')
         lines.append('')
-
         for price_per_gallon, cost_per_100_miles in price_cost_values:
             lines.append(
                 f'  - {format_money(price_per_gallon)} per gallon: {format_money(cost_per_100_miles)} per 100 miles'
             )
-
         lines.append('')
+
+    lines.append('---')
+    lines.append('')
 
     markdown = '\n'.join(lines).rstrip() + '\n'
     return markdown

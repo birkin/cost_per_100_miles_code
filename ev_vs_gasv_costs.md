@@ -1,8 +1,9 @@
 # EV vs Gas Vehicle Costs
 
-Rhode Island cents per kWh: 26
 
 ## Rhode Island Electricity Rates
+
+Rhode Island cents per kWh: 26
 
 Average of July, August, and September 2025 residential bills.
 
@@ -107,3 +108,5 @@ Average of July, August, and September 2025 residential bills.
   - $5.00 per gallon: $10.00 per 100 miles
   - $5.50 per gallon: $11.00 per 100 miles
   - $6.00 per gallon: $12.00 per 100 miles
+
+---
