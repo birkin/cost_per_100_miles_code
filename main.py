@@ -6,7 +6,8 @@
 import logging
 from decimal import Decimal
 
-from lib.calculate_cents_per_kwh import get_ev_100_mile_cost_values, get_gas_100_mile_cost_values, get_rounded_cents_per_kwh
+from lib.calculate_cents_per_kwh import get_ev_100_mile_cost_values, get_rounded_cents_per_kwh
+from lib.gas_calculations import get_gas_100_mile_cost_values
 
 
 def main() -> None:

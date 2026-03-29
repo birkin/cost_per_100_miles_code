@@ -1,7 +1,7 @@
 import unittest
 from decimal import Decimal
 
-from lib.calculate_cents_per_kwh import calculate_gallons_required, calculate_gas_100_mile_cost_values
+from lib.gas_calculations import calculate_gallons_required, calculate_gas_100_mile_cost_values
 
 
 class TestGasCostCalculations(unittest.TestCase):
