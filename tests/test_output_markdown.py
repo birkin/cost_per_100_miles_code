@@ -63,8 +63,8 @@ class TestOutputMarkdown(unittest.TestCase):
         self.assertIn('Rhode Island cents per kWh: 26', contents)
         self.assertIn('## EV Costs', contents)
         self.assertIn('## Gas Costs', contents)
-        self.assertNotIn('miles/kWh', contents)
-        self.assertNotIn('miles/gallon', contents)
+        self.assertNotIn('- ', contents)
+        self.assertNotIn('### ', contents)
 
 
 if __name__ == '__main__':
