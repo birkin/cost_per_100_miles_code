@@ -3,7 +3,7 @@
 # requires-python = ">=3.12"
 # ///
 
-from lib.calculate_cents_per_kwh import get_rounded_cents_per_kwh
+from lib.calculate_cents_per_kwh import get_rounded_cents_per_kwh, print_ev_100_mile_cost_values
 
 
 def main() -> None:
@@ -13,6 +13,7 @@ def main() -> None:
     Called by: __main__
     """
     rhode_island_cents_per_kwh = get_rounded_cents_per_kwh()
+    print_ev_100_mile_cost_values(rhode_island_cents_per_kwh)
     print(f'Rhode Island cents per kWh: {rhode_island_cents_per_kwh}')
 
 
